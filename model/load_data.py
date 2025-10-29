@@ -1,5 +1,9 @@
-import json
+import json, os
+
 def load_data():
-    with open("file/student_data.json","r") as f:
-        data=json.load(f)
-    return data
+    path = "file/student_data.json"
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Data file not found: {path}")
+    with open(path, "r") as f:
+        return json.load(f)
+
