@@ -10,19 +10,19 @@ from p_data.update import update_details
 app=FastAPI()
 
 @app.get("/")
-def home():
+async def home():
     return {"message":"welcome to my school "}
 @app.get("/about")
-def about():
+async def about():
     return{"message":"all student detali in the api"}
 
 @app.get("/view")
-def view_details():
-    data=load_data()
+async def view_details():
+    data=await load_data()
     return data
 
 @app.get("/stuednt/{student_id}")
-def find_student(student_id:int=Path(...,description="enter the roll_no od student",example=1)):
+async def find_student(student_id:int=Path(...,description="enter the roll_no od student",example=1)):
     data=load_data()
     for i in data["student"]:
         if i["student_id"]==student_id:
@@ -30,7 +30,7 @@ def find_student(student_id:int=Path(...,description="enter the roll_no od stude
     HTTPException(status_code=404,detail="file not found ")
 
 @app.get("/total")
-def total_student():
+async def total_student():
     data=load_data()
     return {"total student details" :len(data["student"])}
     
@@ -39,7 +39,7 @@ def total_student():
 
 # post 
 @app.post("/create")
-def create_data(d:student_detail):
+async def create_data(d:student_detail):
     data=load_data()
     if any(i["student_id"]==d.student_id for i in data["student"]):
        raise HTTPException(status_code=400,detail="data already exists")
@@ -49,7 +49,7 @@ def create_data(d:student_detail):
 
 
 @app.put("/edit/{student_id}")
-def edit_student(student_id:int,d:update_details):
+async def edit_student(student_id:int,d:update_details):
     data=load_data()
     for i in data["student"]:
         if i["student_id"]==student_id:
@@ -60,7 +60,7 @@ def edit_student(student_id:int,d:update_details):
         
 
 @app.delete("/delete")
-def delete_student(student_id:int):
+async def delete_student(student_id:int):
     data=load_data()
     for i in data["student"]:
         if i["student_id"]==student_id:
