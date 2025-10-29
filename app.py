@@ -18,7 +18,7 @@ async def about():
 
 @app.get("/view")
 async def view_details():
-    data=await load_data()
+    data=load_data()
     return data
 
 @app.get("/stuednt/{student_id}")
