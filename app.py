@@ -60,7 +60,7 @@ def edit_student(student_id:int,d:update_details):
         
 
 @app.delete("/delete")
-def delete_student(student_id:int,d:update_details):
+def delete_student(student_id:int):
     data=load_data()
     for i in data["student"]:
         if i["student_id"]==student_id:
