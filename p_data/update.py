@@ -9,7 +9,7 @@ class update_details(BaseModel):
     gender:Annotated[Optional[str],Field(description="enter the gender",default=None)]
     p_class:Annotated[Optional[str],Field(description="enter the pclass",default=None)]
     study_hours:Annotated[Optional[float],Field(description="enter the study_hours",default=None)]
-    attendence:Annotated[Optional[int],Field(description="enter the attendence persentage",default=None)]
+    attendance:Annotated[Optional[int],Field(description="enter the attendence persentage",default=None)]
     math_score:Annotated[Optional[int],Field(description="enter the math score",default=None)]
     science_score:Annotated[Optional[int],Field(description="enter the science_score",default=None)]
     english_score:Annotated[Optional[int],Field(description="enter the english_score",default=None)]

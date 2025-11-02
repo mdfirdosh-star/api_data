@@ -9,7 +9,7 @@ class student_detail(BaseModel):
     gender:Annotated[str,Field(...,description="enter the gender")]
     p_class:Annotated[str,Field(...,description="enter the p_calss",example="10th")]
     study_hours:Annotated[float,Field(...,description="enter the study hours")]
-    attendence:Annotated[int,Field(...,description="enter the attendence persentage")]
+    attendance:Annotated[int,Field(...,description="enter the attendence persentage")]
     math_score:Annotated[int,Field(...,description="enter the math persentage ")]
     science_score:Annotated[int,Field(...,description="enter the science presentage")]
     english_score:Annotated[int,Field(...,description="enter the english presentage")]
