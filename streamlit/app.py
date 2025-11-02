@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 st.set_page_config(page_title="Student Form", page_icon="🎓")
-st.title("🎓 Student Data Submission (FastAPI + Streamlit)")
+st.title("🎓 Student Data Submission ")
 
 # API endpoint
 API_URL = "https://student-api-t2xw.onrender.com/create"
