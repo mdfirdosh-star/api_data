@@ -5,7 +5,7 @@ from model.load_data import  load_data
 from model.save_data import save_data
 from p_data.student_data import student_detail
 from p_data.update import update_details
-
+from fastapi.concurrency import run_in_threadpool
 
 
 
@@ -18,11 +18,20 @@ async def home():
 @app.get("/about")
 async def about():
     return{"message":"all student detali in the api"}
-
 @app.get("/view")
-async def view_details():
-    data = await load_data()
-    return data
+async def view_details(page: int = 1, limit: int = 50):
+    data = await run_in_threadpool(load_data)
+
+    start = (page - 1) * limit
+    end = start + limit
+
+    return {
+        "page": page,
+        "limit": limit,
+        "total": len(data),
+        "data": data[start:end]
+    }
+
 @app.get("/stuednt/{student_id}")
 async def find_student(student_id:int=Path(...,description="enter the roll_no od student",example=1)):
     data=load_data()
