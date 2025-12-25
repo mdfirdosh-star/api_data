@@ -6,6 +6,8 @@ from model.save_data import save_data
 from p_data.student_data import student_detail
 from p_data.update import update_details
 from fastapi.concurrency import run_in_threadpool
+from fastapi.encoders import jsonable_encoder
+
 
 
 
@@ -18,9 +20,13 @@ async def home():
 @app.get("/about")
 async def about():
     return{"message":"all student detali in the api"}
+
 @app.get("/view")
 async def view_details(page: int = 1, limit: int = 50):
     data = await run_in_threadpool(load_data)
+
+    if not isinstance(data, list):
+        return {"error": "load_data must return a list"}
 
     start = (page - 1) * limit
     end = start + limit
@@ -29,7 +35,7 @@ async def view_details(page: int = 1, limit: int = 50):
         "page": page,
         "limit": limit,
         "total": len(data),
-        "data": data[start:end]
+        "data": jsonable_encoder(data[start:end])
     }
 
 @app.get("/stuednt/{student_id}")
